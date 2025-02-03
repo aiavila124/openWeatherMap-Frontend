@@ -10,17 +10,20 @@
 .col{
     padding: 20px;
 }
-.col-6.active {
+.col-md-6.active {
+  width: 50%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
-.container-xxl{
+.container{
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -38,7 +41,7 @@
 
 .custom-btn.active{
   padding: 0.5em 8em;
-  margin-left: 10vh;
+  margin-left: 2%;
 }
 
 .custom-btn.inactive{
@@ -55,6 +58,9 @@
 }
 
 .result {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: aliceblue;
 }
@@ -79,5 +85,12 @@ h5 {
 img {
   width: 5vh;
   height: 5vh;
+}
+
+.col-12 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 

@@ -12,9 +12,9 @@
   </div>
 </nav>
 
-<div class="container-xxl" [ngClass]="{'active': weatherForecast, 'inactive': !weatherForecast}">
+<div class="container" [ngClass]="{'active': weatherForecast, 'inactive': !weatherForecast}">
   <div class="row">
-    <div class="col-6" [ngClass]="{'active':weatherForecast}">
+    <div  [ngClass]="{'active':weatherForecast, 'col-12': !weatherForecast , 'col-md-6': weatherForecast}">
 
       <h5> Seleccione la ciudad que desea consultar: </h5>
       
@@ -58,8 +58,7 @@
     </div>
 
     @if (weatherForecast) {
-      <div class="col-6 result">
-
+      <div class="col-md-6 result">
         <table class="table">
           <tbody>
             @for (item of weatherForecast.daily; track item) {
