@@ -1,0 +1,85 @@
+ <nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <span class="navbar-brand name">Hola, {{ name }} {{ lastName }}</span>
+      </ul>
+      <form class="d-flex" role="search">
+        <button class="btn btn-outline-danger" type="submit" (click)="logOut()">Cerrar Sesión</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="container-xxl" [ngClass]="{'active': weatherForecast, 'inactive': !weatherForecast}">
+  <div class="row">
+    <div class="col-6" [ngClass]="{'active':weatherForecast}">
+
+      <h5> Seleccione la ciudad que desea consultar: </h5>
+      
+      <br>
+
+      <select class="form-select large-select"
+        (change)="getStates($event)">
+        <option value="" selected>Seleccione un país</option>
+        @for(item of countries; track item.country_id) {
+          <option [value]="item.country_id">{{item.name}}</option>
+        }
+      </select>
+
+      <br>
+
+      <select class="form-select large-select"
+        (change)="getCities($event)" [disabled]="!countryId">
+        <option selected>Seleccione un departamento</option>
+        @for(item of states; track item.state_id) {
+          <option [value]="item.state_id">{{item.name}}</option>
+        }
+      </select>
+
+      <br>
+
+      <select class="form-select large-select"
+      (change)="setCityId($event)" [disabled]="!stateId || !countryId">
+        <option selected>Seleccione una ciudad</option>
+        @for(item of cities; track item.city_id) {
+          <option [value]="item.city_id">{{item.name}}</option>
+        }
+      </select>
+
+      <br>
+
+      <button type="button" class="btn custom-btn" (click)="getWeatherForecast()"
+      [disabled]="!cityId" [ngClass]="{'active': !weatherForecast, 'inactive': weatherForecast}">
+        Buscar
+      </button>
+
+    </div>
+
+    @if (weatherForecast) {
+      <div class="col-6 result">
+
+        <table class="table">
+          <tbody>
+            @for (item of weatherForecast.daily; track item) {
+              <tr>
+                <td>
+                  <h5>{{ item.dt }} - {{  item.weather[0].description}} <img src="{{ item.weather[0].icon }}" ></h5> 
+                  <p>
+                    {{ item.summary }}. 
+                    <br>
+                    - Se pronostica una temperatura máxima de {{ item.temp.max }} °C.
+                    <br>
+                    - Se pronostica una temperatura mínima de {{ item.temp.min }} °C.
+                  </p>
+                </td>
+              </tr>
+            }
+
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</div>

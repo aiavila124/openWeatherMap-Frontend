@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="btn-group">
+                <a class="btn custom-btn" [ngClass]="{'active': loginChecked}" (click)="selectButton(1)">Inicio Sesión</a>
+                <a class="btn custom-btn" [ngClass]="{'active': !loginChecked}" (click)="selectButton(2)">Registrarse</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <span class="span">{{ loginChecked ? "¡Bienvenido!" : "Ingrese sus datos para registrarse" }}</span>
+        </div>
+    </div>
+
+    @if (!loginChecked) {
+        <div class="row">
+            <div class="col-6">
+                <input type="text" class="form-control names" id="exampleFormControlInput1" 
+                    [(ngModel)]="createUserModel.first_name" placeholder="Primer nombre" maxlength="25">
+            </div>
+            <div class="col-6">
+                <input type="text" class="form-control names" 
+                    [(ngModel)]="createUserModel.last_name" placeholder="Primer apellido" maxlength="25">
+            </div>
+        </div>
+        
+    }
+
+    <div class="row">
+        <div class="col">
+            <input type="email" class="form-control" 
+                [(ngModel)]="email"
+                (ngModelChange)="setEmailAttribute()"
+                    placeholder="name@example.com" required maxlength="50">
+            <br>
+            <input type="password" id="inputPassword6" class="form-control" 
+                [(ngModel)]="password"
+                (ngModelChange)="setPasswordAttribute()"
+                aria-describedby="passwordHelpInline" placeholder="Password" maxlength="20">
+        </div>
+    </div>
+
+    @if ((loginFailed && loginChecked) || (registerFailed && !loginChecked)) {
+        <span class="warning"> {{ errorMessage }} </span>
+    }
+
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn custom-btn" (click)="loginChecked ? getToken() : createUser()">
+                {{ loginChecked ? "Ingresar" : "Registrarse" }}
+            </button>
+        </div>
+    </div>
+</div>
